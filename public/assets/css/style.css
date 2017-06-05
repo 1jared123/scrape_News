@@ -1,0 +1,181 @@
+body {
+	background-color: #f2f2f2;
+	padding-bottom: 20px;
+}
+
+h1 {
+	color: #248f8f;
+	text-shadow: 0 0 5px #0099cc, 0 0 10px #0099cc,
+             0 0 20px #0099cc, 0 0 30px #0099cc,
+             0 0 40px #0099cc;
+}
+
+h2 {
+	font-size: 24px;
+	color: #2eb8b8;
+	text-shadow: 1px 1px 1px #ccc;
+
+}
+
+.page-wrap {
+  min-height: 100%;
+	margin-bottom: -60px; 
+}
+
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.footer-hs, .page-wrap:after {
+	height: 60px; 
+}
+.footer-hs {
+  background: orange;
+}
+
+.navigation {
+	background-color: #fff;
+}
+
+.doctors-table {
+	background-color: #e6e6e6;
+}
+
+.navbar-right {
+	/*padding-top: 5px;*/
+}
+
+.steve {
+	padding-right: 50px;
+	padding-left: 50px;
+}
+
+.main-screen {
+	padding: 10px;
+}
+
+.gandalf,
+.morpheus {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+}
+
+.meds {
+	margin: 0 auto;
+	position: static;
+}
+
+.footer-hs {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding: 5px auto 0px auto;
+    background-color: #ddd;
+}
+
+.header-hs {
+	border-bottom-width: 5px;
+}
+
+.navbar-brand {
+	padding: 5px;
+}
+
+.logo {
+	height: 45px;
+	width: 125px;
+}
+
+.all-doctors-page {
+	font-weight: 20px;
+}
+
+.information {
+	width: 100%;
+}
+
+.welcome-page {
+	padding: 5px;
+	height: 400px;
+}
+
+.dcbrown {
+	padding: 0px;
+	height: 90%;
+	width: 90%;
+}
+
+.welcome-text {
+	padding: 5px;
+	font-size: 150%;
+    color: #444;
+	text-shadow:
+	   1px 0px 1px #ccc, 0px 1px 1px #eee,
+	   2px 1px 1px #ccc, 1px 2px 1px #eee,
+	   3px 2px 1px #ccc, 2px 3px 1px #eee,
+	   4px 3px 1px #ccc, 3px 4px 1px #eee,
+	   5px 4px 1px #ccc, 4px 5px 1px #eee,
+	   6px 5px 1px #ccc, 5px 6px 1px #eee,
+	   7px 6px 1px #ccc;
+
+}
+
+.user-text {
+    font-size: 15px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.form-horizontal {
+    padding-left: 20px;
+}
+
+.register-row,
+.login-row {
+    padding: 10px;
+}
+
+/* DASHBOARD-SPECIFIC  */
+#diagnosis,
+.doctors-select{
+	width: 75%;
+	margin-bottom: 15px;
+}
+
+.add-patient div {
+	padding: 5px;
+}
+
+.patient-button {
+	padding: 10px;
+	margin: 10px;
+}
+
+.match-image img{
+	width: 100%;
+	height: 100%;
+	margin-bottom: 10px;
+}
+
+.match-image h3{
+	margin: 0px auto 10px auto;
+	text-shadow: 1px 1px 1px #ccc;
+/*	font-style: italic;
+	font-weight: bold;*/
+	color: #2eb8b8;
+}
+
+.match-image h4{
+	font-weight: bold;
+	color: #1A3E5E;
+}
+
+.doc-results b {
+	color: #325ab7;
+}
+
+.adminp,
+.about-header,
+.doc-header {
+	text-align: center;
+}
