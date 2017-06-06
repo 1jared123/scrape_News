@@ -1,10 +1,7 @@
 //Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
 
-var Note = require("./models/Note.js");
-var Article = require("./models/Article.js");
 
 var app = express();
 var PORT = process.env.PORT || 7526;
@@ -42,3 +39,5 @@ app.get("*", function(req, res) {
 app.listen(PORT, function() {
     console.log("Server Operational - Listening to Port " + PORT);
 });
+
+

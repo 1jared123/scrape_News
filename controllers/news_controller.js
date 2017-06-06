@@ -2,10 +2,16 @@
 var express = require("express");
 var router = express.Router();
 var mongojs = require("mongojs");
+var mongoose = require("mongoose");
+
 
 // Require request and cheerio. This makes the scraping possible
 var request = require("request");
 var cheerio = require("cheerio");
+
+var Note = require("../models/Note.js");
+var Article = require("../models/Article.js");
+
 
 // Initialize Express
 var router = express();
@@ -14,10 +20,18 @@ var router = express();
 var databaseUrl = "scraper";
 var collections = ["scrapedData"];
 
-// Hook mongojs configuration to the db variable
-var db = mongojs(databaseUrl, collections);
+
+mongoose.connect("mongodb://localhost/scrape_news");
+var db = mongoose.connection;
+
+// Show any mongoose errors
 db.on("error", function(error) {
-  console.log("Database Error:", error);
+  console.log("Mongoose Error: ", error);
+});
+
+// Once logged in to the db through mongoose, log a success message
+db.once("open", function() {
+  console.log("Mongoose connection successful.");
 });
 
 
@@ -25,63 +39,57 @@ db.on("error", function(error) {
 
 // Main route (simple Hello World Message)
 router.get("/", function(req, res) {
-  res.send("Hello world");
+  res.redirect("/all")
 });
 
 // Retrieve data from the db
 router.get("/all", function(req, res) {
   // Find all results from the scrapedData collection in the db
-  db.scrapedData.find({}, function(error, found) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as a json
-    else {
-      res.render("index", {
-        articles: found
-      });
-    }
-  });
+  Article.find({}, function(error, results) {
+      if (error) {
+        res.send(error);
+      }
+      else {
+        res.render("dashboard", { article: results });
+      }
+    })
 });
 
 // Scrape data from one site and place it into the mongodb db
 router.get("/scrape", function(req, res) {
-  // Make a request for the news section of ycombinator
-  request("https://news.ycombinator.com/", function(error, response, html) {
-    // Load the html body from request into cheerio
+  // First, we grab the body of the html with request
+  request("http://www.espn.com/college-football/", function(error, response, html) {
+    // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);
-    // For each element with a "title" class
-    $(".title").each(function(i, element) {
-      // Save the text of each link enclosed in the current element
-      var title = $(this).children("a").text();
-      // Save the href value of each link enclosed in the current element
-      var link = $(this).children("a").attr("href");
+    // Now, we grab every h2 within an article tag, and do the following:
+    $("article section").each(function(i, element) {
 
-      // If this title element had both a title and a link
-      if (title && link) {
-        // Save the data in the scrapedData db
-        db.scrapedData.save({
-          title: title,
-          link: link
-        },
-        function(error, saved) {
-          // If there's an error during this query
-          if (error) {
-            // Log the error
-            console.log(error);
-          }
-          // Otherwise,
-          else {
-            // Log the saved data
-            console.log(saved);
-          }
-        });
-      }
+      // Save an empty result object
+      var result = {};
+
+      // Add the text and href of every link, and save them as properties of the result object
+      result.title = $(this).find("h1").text();
+      result.link = $(this).find("a").attr("href");
+
+      // Using our Article model, create a new entry
+      // This effectively passes the result object to the entry (and the title and link)
+      var entry = new Article(result);
+
+      // Now, save that entry to the db
+      entry.save(function(err, doc) {
+        // Log any errors
+        if (err) {
+          console.log(err);
+        }
+        // Or log the doc
+        else {
+          console.log(doc);
+        }
+      });
+
     });
   });
-
-  // This will send a "Scrape Complete" message to the browser
+  // Tell the browser that we finished scraping the text
   res.send("Scrape Complete");
 });
 

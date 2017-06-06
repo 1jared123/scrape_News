@@ -1,70 +1,13 @@
 <div class="container">
-    <div class="col-md-6">
-        <h2>Patient Request</h2>
-        <hr>
-{{!--         <form class="create-form add-patient" action="/dashboard/update-patient/{{user.patient_id}}?_method=PUT" method="POST"> --}}
-            <div class="form-group">
-
-                <label for="diagnosis"class="col-md-4 control-label">Diagnosis:</label>
-                <div class="col-md-8">
-                <input type="text" name="diagnosis" id="diagnosis" placeholder="Current Diagnosis">
-                </div>
-
-                <label for="current_doctor" class="col-md-4 control-label">Current Doctor:</label>
-                <div class="col-md-8">
-                    <select data-placeholder="" name="current_doctor" class="doctors-select" id="doctor">
-                        {{#each doctors}}
-                            {{#unless removed}}
-                                <option class ="docid" value="{{this.bestdoc_id}}">{{this.first_name}} {{this.last_name}},{{this.title}}</option>
-                            {{/unless}}
-                        {{/each}}
-                    </select>
-                </div>
-        <!--
-                <h4>What type of specialist are you looking for?</h4>
-                <select data-placeholder="" name="speciality" class="speciality-select" id="speciality">
-                    <option value="oncology">Oncology</option>
-                    <option value="cardiology">Cardiology</option>
-                    <option value="obstetrics">Obstetrics</option>
-                    <option value="rheumatology">Rheumatology</option>
-                </select>
-        -->
-                <br><br>
-
-                <button type="submit" class="btn btn-primary patient-button">Submit</button>
-
-            </div>
-{{!--         </form> --}}
-    </div>
-
-<!--Results Panel-->
-    <div class="col-md-6 doc-results">
-        <h2>Your Second Opinion</h2>
-        <hr>
-        <div class= "directions">To get started, please fill out the patient request form.</div>
-            {{#if user.match_doctor}}
-               {{!--  <div class="row doctor-result">
-                    <div class="col-md-3"><img src="/assets/catscan.jpg"></div>
-                    <div class="col-md-9">
-                        <h4>Muffy Von Fluff, MD</h4>
-                        <p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb.</p>
-                        <p>Paws of Mercy Hospital: 234 Medical Rd. Chicago, IL</p>
-                        <p>Tel: (555)867-5309</p>
-                    </div>
-                </div> --}}
-            {{else}}
-                
-            {{/if}}
-{{!--         {{/each}}
- --}}
-        <!--
-            <p>Doctor Name: Bruce Banner, MD</p>
-            <p>Specialty: Kicking Ass, Taking Names</p>
-
-        -->
+    <div class="col-md-12">
+        {{#each article}}
+            <p>{{this.title}}<p>
+            <a href="{{this.link}}">Story Link</a>
+            <br>
+        {{/each}}
 
     </div>
 
-<!-- end container -->
+
 </div>
 <script type="text/javascript" src="assets/javascript/dashboard.js"></script>
