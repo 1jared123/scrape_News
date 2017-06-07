@@ -1,13 +1,30 @@
 <div class="container">
-    <div class="col-md-12">
+
+	<div class="col-md-6 main-content">
+		
+        <div id="wrapper">
+          <h1>College Football News</h1>
+          <h2><i>If this works, I might actually pass....</i></h2>
+
+        </div>
+         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
         {{#each article}}
-            <p>{{this.title}}<p>
-            <a href="{{this.link}}">Story Link</a>
+            <p data-id="{{this._id}}">{{this.title}}<p>
+            <a href="http://www.espn.com/college-football/{{this.link}}">Story Link</a>
+            <br>
             <br>
         {{/each}}
+		
+		<div id="articles"></div>
+        <div id="notes"></div>
+        <div id="past_notes"></div>
 
     </div>
 
+	<div class="col-md-6">
+		  
+	</div>
+
 
 </div>
-<script type="text/javascript" src="assets/javascript/dashboard.js"></script>

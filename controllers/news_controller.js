@@ -3,6 +3,10 @@ var express = require("express");
 var router = express.Router();
 var mongojs = require("mongojs");
 var mongoose = require("mongoose");
+var logger = require("morgan");
+var bodyParser = require("body-parser");
+
+mongoose.Promise = Promise;
 
 
 // Require request and cheerio. This makes the scraping possible
@@ -12,6 +16,10 @@ var cheerio = require("cheerio");
 var Note = require("../models/Note.js");
 var Article = require("../models/Article.js");
 
+router.use(logger("dev"));
+router.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 // Initialize Express
 var router = express();
@@ -34,9 +42,6 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-
-
-
 // Main route (simple Hello World Message)
 router.get("/", function(req, res) {
   res.redirect("/all")
@@ -53,6 +58,46 @@ router.get("/all", function(req, res) {
         res.render("dashboard", { article: results });
       }
     })
+});
+
+router.get("/articles/:id", function(req, res) {
+
+  Article.findOne({"_id":req.params.id}).populate("note").exec(function(error, work) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.json(work);
+    }
+  })
+
+});
+
+router.post("/articles/:id", function(req, res) {
+
+  var newNote = new Note(req.body);
+
+// Save the new book in the books collection
+  newNote.save(function(err, doc) {
+    // Send an error to the browser if there's something wrong
+    if (err) {
+      console.log(err);
+    }
+    // Otherwise...
+    else {
+        Article.findOneAndUpdate({ "_id": req.params.id }, { "note": doc._id }).exec(function(error, doc) {
+        // Send any errors to the browser
+        if (error) {
+          res.send(error);
+        }
+        // Or send the doc to the browser
+        else {
+          res.send(doc);
+        }
+      });
+    }
+  });
+
 });
 
 // Scrape data from one site and place it into the mongodb db

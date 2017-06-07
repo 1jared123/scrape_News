@@ -17,6 +17,15 @@ h2 {
 
 }
 
+.main-content {
+	margin-right: 20px;
+}
+
+ #notes {
+        float: right;
+        width: 30%;
+      }
+
 .page-wrap {
   min-height: 100%;
 	margin-bottom: -60px; 
@@ -37,34 +46,10 @@ h2 {
 	background-color: #fff;
 }
 
-.doctors-table {
-	background-color: #e6e6e6;
-}
-
-.navbar-right {
-	/*padding-top: 5px;*/
-}
-
-.steve {
-	padding-right: 50px;
-	padding-left: 50px;
-}
-
 .main-screen {
 	padding: 10px;
 }
 
-.gandalf,
-.morpheus {
-    margin: 0 auto;
-    height: 100%;
-    width: 100%;
-}
-
-.meds {
-	margin: 0 auto;
-	position: static;
-}
 
 .footer-hs {
     text-align: center;
@@ -82,27 +67,8 @@ h2 {
 }
 
 .logo {
-	height: 45px;
-	width: 125px;
-}
-
-.all-doctors-page {
-	font-weight: 20px;
-}
-
-.information {
-	width: 100%;
-}
-
-.welcome-page {
-	padding: 5px;
-	height: 400px;
-}
-
-.dcbrown {
-	padding: 0px;
-	height: 90%;
-	width: 90%;
+	height: 50px;
+	width: 70px;
 }
 
 .welcome-text {
@@ -124,58 +90,4 @@ h2 {
     font-size: 15px;
     font-weight: bold;
     padding-top: 5px;
-}
-
-.form-horizontal {
-    padding-left: 20px;
-}
-
-.register-row,
-.login-row {
-    padding: 10px;
-}
-
-/* DASHBOARD-SPECIFIC  */
-#diagnosis,
-.doctors-select{
-	width: 75%;
-	margin-bottom: 15px;
-}
-
-.add-patient div {
-	padding: 5px;
-}
-
-.patient-button {
-	padding: 10px;
-	margin: 10px;
-}
-
-.match-image img{
-	width: 100%;
-	height: 100%;
-	margin-bottom: 10px;
-}
-
-.match-image h3{
-	margin: 0px auto 10px auto;
-	text-shadow: 1px 1px 1px #ccc;
-/*	font-style: italic;
-	font-weight: bold;*/
-	color: #2eb8b8;
-}
-
-.match-image h4{
-	font-weight: bold;
-	color: #1A3E5E;
-}
-
-.doc-results b {
-	color: #325ab7;
-}
-
-.adminp,
-.about-header,
-.doc-header {
-	text-align: center;
 }
