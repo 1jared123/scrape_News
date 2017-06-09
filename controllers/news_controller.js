@@ -73,6 +73,17 @@ router.get("/articles/:id", function(req, res) {
 
 });
 
+router.post("/remove/:id", function(req, res) {
+  Note.findOneAndRemove({ "_id":req.params.id}, function(err, todo) {
+    var response = {
+      message: "Comment successfully deleted",
+      id: todo._id
+    }
+     res.send("done")
+  })
+
+})
+
 router.post("/articles/:id", function(req, res) {
 
   var newNote = new Note(req.body);
@@ -85,7 +96,7 @@ router.post("/articles/:id", function(req, res) {
     }
     // Otherwise...
     else {
-        Article.findOneAndUpdate({ "_id": req.params.id }, { "note": doc._id }).exec(function(error, doc) {
+        Article.findOneAndUpdate({ "_id": req.params.id }, { $push: { "note": doc._id } }, { new: true }).exec(function(error, doc) {
         // Send any errors to the browser
         if (error) {
           res.send(error);
@@ -135,7 +146,7 @@ router.get("/scrape", function(req, res) {
     });
   });
   // Tell the browser that we finished scraping the text
-  res.send("Scrape Complete");
+  res.redirect("/all");
 });
 
 module.exports = router;
