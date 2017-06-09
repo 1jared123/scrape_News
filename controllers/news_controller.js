@@ -29,7 +29,7 @@ var databaseUrl = "scraper";
 var collections = ["scrapedData"];
 
 
-mongoose.connect("mongodb://localhost/scrape_news");
+mongoose.connect("mongodb://heroku_qtbdcbjr:ja43ehb1en1e4m63qv85rlhmc7@ds161121.mlab.com:61121/heroku_qtbdcbjr");
 var db = mongoose.connection;
 
 // Show any mongoose errors
