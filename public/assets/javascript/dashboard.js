@@ -31,6 +31,7 @@ $(document).on("click", "p", function() {
       // If there's a note in the article
       if (data.note) {
         for (i = 0; i < data.note.length; i++) {
+          //we will append the note and a button to remove it!!
           $("#past_notes").append(
             "<br><p>Author: " +
               data.note[i].title +

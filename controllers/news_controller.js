@@ -28,7 +28,7 @@ var router = express();
 var databaseUrl = "scraper";
 var collections = ["scrapedData"];
 
-
+//here the connection to mongodb for heroku.
 mongoose.connect("mongodb://heroku_qtbdcbjr:ja43ehb1en1e4m63qv85rlhmc7@ds161121.mlab.com:61121/heroku_qtbdcbjr");
 var db = mongoose.connection;
 
@@ -60,6 +60,7 @@ router.get("/all", function(req, res) {
     })
 });
 
+//get the comments linked to an article
 router.get("/articles/:id", function(req, res) {
 
   Article.findOne({"_id":req.params.id}).populate("note").exec(function(error, work) {
@@ -73,6 +74,7 @@ router.get("/articles/:id", function(req, res) {
 
 });
 
+//remove a comment
 router.post("/remove/:id", function(req, res) {
   Note.findOneAndRemove({ "_id":req.params.id}, function(err, todo) {
     var response = {
@@ -84,6 +86,8 @@ router.post("/remove/:id", function(req, res) {
 
 })
 
+
+//save a comment to an article.
 router.post("/articles/:id", function(req, res) {
 
   var newNote = new Note(req.body);
@@ -111,7 +115,7 @@ router.post("/articles/:id", function(req, res) {
 
 });
 
-// Scrape data from one site and place it into the mongodb db
+// Scrape data from espn and place it into the mongodb db
 router.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
   request("http://www.espn.com/college-football/", function(error, response, html) {
