@@ -62,7 +62,6 @@ router.get("/all", function(req, res) {
 
 //get the comments linked to an article
 router.get("/articles/:id", function(req, res) {
-
   Article.findOne({"_id":req.params.id}).populate("note").exec(function(error, work) {
     if (error) {
       res.send(error);
